@@ -1,0 +1,187 @@
+/***************************************** GLOBAL *****************************************/
+
+
+.content {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.hamburger__menu {
+    display: none;
+}
+
+
+/*********************************** FOR SMALL VIEWPORTS **********************************/
+
+@media screen and (max-width: 550px) {
+    .header__inner {
+        display: flex;
+        flex-wrap: nowrap;
+        width: 100%;
+    }
+    .header__logo {
+        width: 15%;
+    }
+
+    .header__title {
+        width: 70%;
+        font-size: 3.2em;
+    }
+    
+    .hamburger__menu { 
+        display: flex;
+        width: 15%;
+        font-size: 3.2em;
+        text-decoration: none;
+        color: #333;
+        margin-top: 25px;
+    }
+    
+    .nav {
+        width: 300px;
+        height: 100%;
+        position: absolute;
+        transform: translateX(-300px);
+        -webkit-transform: translateX(-300px);
+    }
+    
+    .nav__item {
+        display: list-item;
+        width: 100%;
+        background: white;
+        box-shadow: 0px 1px 10px rgba(131, 131, 131, 0.39);
+    }
+    
+    .nav.open__menu {
+        z-index: 1;
+        transform: translateX(0);
+        -webkit-transform: translateX(0);
+    }
+    
+    .top-news, .scores, .weather {
+        width: 100%;
+    }
+    
+    ul.weather__next {
+        display: flex;
+        flex-wrap: nowrap;
+        width: 100%;
+    }
+}
+
+
+/****************************** FOR SMALL / MEDIUM VIEWPORTS ******************************/
+
+
+@media screen and (min-width: 551px) and (max-width: 700px) {
+    .hero {
+        width: 50%;
+        order: 1;
+    }
+    
+    .weather {
+        width: 50%;
+        order: 2;
+    }
+    
+    .top-news {
+        width: 100%;
+        order: 3;
+    }
+    
+    .scores {
+        width: 100%;
+        order: 4;
+    }
+    
+    .recent-news {
+        width: 100%;
+        order: 5;
+    }
+}
+
+
+/****************************** FOR MEDIUM / LARGE VIEWPORTS ******************************/
+
+
+@media screen and (min-width: 701px) and (max-width: 865px) {
+    .hero {
+        width: 50%;
+        order: 1;
+    }
+    
+    .top-news {
+        width: 50%;
+        order: 2;
+    }
+    
+    .scores {
+        width: 66.66%;
+        order: 3;
+    }
+    
+    .weather {
+        width: 33.33%;
+        order: 4;
+    }
+
+    .weather__next {
+        width: 100%;
+        display: flex;
+        flex-wrap: nowrap;
+    }
+    
+    .recent-news {
+        width: 100%;
+        order: 5;
+    }
+}
+
+
+/****************************** FOR LARGE / X-LARGE VIEWPORTS ******************************/
+
+
+@media screen and (min-width: 866px) {
+    .container {
+        margin-left: auto;
+        margin-right: auto;
+        width: 866px;
+    }
+
+    .hero {
+        width: 50%;
+        order: 1;
+    }
+
+    .top-news {
+        width: 50%;
+        order: 2;
+    }
+
+    .scores {
+        width: 66.66%;
+        order: 3;
+    }
+
+    .weather {
+        width: 33.33%;
+        order: 4;
+    }
+
+    .weather__next {
+        width: 100%;
+        display: flex;
+        flex-wrap: nowrap;
+    }
+
+    .recent-news {
+        width: 100%;
+        order: 5;
+    }
+}
+
+
+
+
+
+
