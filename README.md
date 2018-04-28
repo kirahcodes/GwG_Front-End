@@ -2,7 +2,7 @@
 
 ## **SECTION 1 - Web Foundations**
 
-* Lessons:
+* **LESSONS:**
     1. HTML Syntax
     2. CSS Syntax
     3. Writing Code Efficiently
