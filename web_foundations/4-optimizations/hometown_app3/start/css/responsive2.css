@@ -1,37 +1,44 @@
-/* Fix scores overlapping top news on smallest display */
-.content { 
-    box-sizing: border-box; 
+.content {
+    box-sizing: border-box;
     font-size: 16px;
 }
 
-@media screen and (min-width: 450px) {
+@media screen and (max-width: 610px) {
+    .hero {
+        width: 100%;
+    }
     .header__title {
         font-size: 32px;
         font-weight: 300;
     }
-    .description { min-height: 60%; }
-    
+    .description {
+        min-height: 60%;
+    }
     .description h2 {
         font-size: 26px;
         line-height: 0.9em;
     }
-    
-    .description p { font-size: 16px; }
-    .news { height: 100%; }
-
-    .top-news__item { 
-        font-size: 16px; 
+    .description p {
+        font-size: 16px;
+    }
+    .news {
+        height: 100%;
+    }
+    .top-news__item {
+        font-size: 16px;
         width: 100%;
     }
-    
     .scores {
         padding-top: 0;
         overflow-x: auto;
     }
-    
-    th, td { font-size: 14px; }
-    .snippet a { font-size: 19px; }
-    
+    th,
+    td {
+        font-size: 14px;
+    }
+    .snippet a {
+        font-size: 19px;
+    }
     .snippet p {
         font-size: 16px;
         line-height: 1.3em;
@@ -42,23 +49,34 @@
         -webkit-box-orient: vertical;
         overflow: hidden;
     }
-    
-    .snippet img { display: none; }
-    .snippet__paragraph { width: 100%; }
+    .snippet img {
+        display: none;
+    }
+    .snippet__paragraph {
+        width: 100%;
+    }
 }
 
-@media screen and (max-width: 549px) {
-
-}
-
-@media screen and (min-width: 550px) {
-
+@media screen and (min-width: 611px) {
+    .snippet p {
+        font-size: 16px;
+        line-height: 1.4em;
+        display: -webkit-box;
+        /* the maximum number of lines before truncating the content */
+        -webkit-line-clamp: 3;
+        /* specifies whether the paragraph lays out its contents horizontally or vertically */
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+    }
+    .snippet img {
+        width: 25%;
+        margin-bottom: 5%;
+    }
 }
 
 @media screen and (min-width: 700px) {
-
-}
-
-@media screen and (min-width: 850px) {
-
+    .scores {
+        width: 60%;
+        font-size: 14px;
+    }
 }

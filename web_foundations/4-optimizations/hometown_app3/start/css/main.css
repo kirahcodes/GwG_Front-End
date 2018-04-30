@@ -1,4 +1,5 @@
-body, html {
+body,
+html {
   margin: 0;
   padding: 0;
   width: 100%;
@@ -11,11 +12,24 @@ body {
   color: #424242;
 }
 
-h1, h2, h3, h4, h5 {
-  margin: 0; 
+h1,
+h2,
+h3,
+h4,
+h5 {
+  margin: 0;
 }
 
-header, nav, footer, section, article, div {
+header,
+nav,
+footer,
+section,
+article,
+div {
+  box-sizing: border-box;
+}
+
+* {
   box-sizing: border-box;
 }
 
@@ -24,7 +38,6 @@ ul {
   padding: 0;
   margin: 0;
 }
-
 
 /*
  *
@@ -38,7 +51,6 @@ ul {
   color: #333;
   text-decoration: none;
 }
-
 
 /*
  *
@@ -67,12 +79,11 @@ ul {
 
 .header__title {
   font-weight: 300;
-  font-size: 4em;
-  margin: 0.5em 0.25em;
+  font-size: 3em;
+  margin: 0.75em 0.25em;
   display: inline-block;
   color: #212121;
 }
-
 
 /*
  *
@@ -113,7 +124,6 @@ ul {
   color: #212121;
 }
 
-
 /*
  *
  * Main
@@ -133,7 +143,6 @@ main {
  *
  */
 
-
 /*
  *
  * Hero
@@ -145,7 +154,7 @@ main {
   position: relative;
   background-image: url("../images/dog.jpg");
   background-size: cover;
-  height: 300px;
+  min-height: 300px;
 }
 
 .hero article {
@@ -154,12 +163,10 @@ main {
   background-color: rgba(0, 0, 0, 0.7);
   position: absolute;
   bottom: 0;
-  /* height: 40%; */
   width: 100%;
   color: #fff;
   padding: 1em;
 }
-
 
 /*
  *
@@ -168,7 +175,6 @@ main {
  */
 
 .top-news {
-  min-height: 300px;
   border-bottom: 1px solid #E0E0E0;
   padding: 1em;
   width: 100%;
@@ -206,7 +212,6 @@ main {
   text-decoration: underline;
 }
 
-
 /*
  *
  * Sport Scores
@@ -225,13 +230,21 @@ main {
 
 .scores__table th,
 .scores__table td {
-  padding: 1em; 
+  padding: 1em;
 }
 
 .scores__table th {
   color: #fff;
   font-weight: 300;
   background-color: #78909C;
+}
+
+.scores__table tr:nth-child(1) th:nth-child(3) {
+  text-align: right;
+}
+
+.scores__table tr:nth-child(1) th:nth-child(5) {
+  text-align: left;
 }
 
 .scores__table tr:nth-child(odd) td {
@@ -250,8 +263,8 @@ main {
   text-align: right;
 }
 
-.scores__table td:nth-child(2),
-.scores__table td:nth-child(5) {
+.scores__table td:nth-child(1),
+.scores__table td:nth-child(2) {
   text-align: center;
 }
 
@@ -272,7 +285,7 @@ main {
   font-size: 1.5em;
 }
 
-.weather__desc {
+.weather__ {
   display: block;
   font-size: 1.2em;
 }
@@ -308,7 +321,6 @@ main {
 .weather__next__image {
   width: 100%;
 }
-
 
 /*
  *
@@ -347,7 +359,6 @@ main {
 .snippet__title a:active {
   text-decoration: underline;
 }
-
 
 /*
  *
