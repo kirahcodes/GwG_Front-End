@@ -38,8 +38,7 @@ body {
 
 .header-name {
     font-family: 'Fira Sans', sans-serif;
-    letter-spacing: 0.075em;
-    font-weight: 500;
+    font-weight: 300;
     text-transform: uppercase;
 }
 
@@ -53,14 +52,14 @@ body {
 
 .hero-section {
     width: 100%;
-    height: 500px;
-    line-height: 500px;
+    height: 370px;
+    line-height: 370px;
     font-size: 4em;
-    font-weight: 600;
+    font-weight: 400;
     letter-spacing: 0.15em;
     color: white;
     text-align: center;
-    font-family: 'Montserrat', sans-serif;
+    font-family: 'Fira Sans', sans-serif;
     text-transform: uppercase;
     text-shadow: 3px 3px 10px rgb(44, 44, 44);
     background: url(../img/hero.jpg);
@@ -75,11 +74,14 @@ body {
 
 /* ============================== FEATURED WORK STYLES ============================== */
 
+.featured-work {
+    border-bottom: solid 3px #525252;
+}
+
 .featured-work h1 {
-    font-family: 'Montserrat', sans-serif;
+    font-family: 'Fira Sans', sans-serif;
     font-size: 2.2em;
     font-weight: 400;
-    text-shadow: 2px 2px 6px rgba(12, 12, 12, 0.178);
     margin-top: 2em;
     margin-bottom: 1em;
 }
@@ -89,19 +91,21 @@ body {
     display: inline-grid;
     grid-template-columns: 1fr 1fr;
     grid-gap: 5%;
-    font-family: 'Montserrat', sans-serif;
+    font-family: 'Fira Sans', sans-serif;
     box-sizing: border-box;
 }
 
 .project-container {
-    background: #f0f0f0;
+    font-family: 'Fira Sans', sans-serif;
+    background: #f8f8f8;
     margin-bottom: 10%;
     border-radius: 10px;
-    height: 350px;
+    height: 360px;
+    box-shadow: 1px 1px 10px rgba(12, 12, 12, 0.685);
 }
 
 .project-info {
-    padding: 10px 30px;
+    padding: 0 10px 15px;
 }
 
 .project-img {
@@ -112,12 +116,47 @@ body {
 }
 
 .project-title {
-    font-family: 'Montserrat', sans-serif;
+    font-weight: 400;
+    width: 100%;
+    font-size: 1.15em;
+    text-align: left;
+}
+
+.project-description {
+    font-weight: 300;
+    width: 100%;
+    text-align: left;
+    font-size: 1em;
+}
+
+.project-buttons {
+    display: grid;
+    grid-template-columns: 1fr;
+    text-align: center;
 }
 
 .github-btn {
     box-sizing: border-box;
-    width: 30%;
+    width: 100%;
+    padding: 8px 10px;
+    /* margin-bottom: 10px; */
+    border: solid 2px #525252;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 1.1em;
+    color: #525252;
+    
+    transition-property: background, color;
+    transition-timing-function: ease-in-out;
+    transition-duration: 0.275s;
+}
+
+.github-btn i { padding-right: 5px; }
+
+.github-btn:hover {
+    background: #525252;
+    color: white;
 }
 
 #project-img1 {
@@ -154,4 +193,43 @@ body {
     background: url('../img/project-img6.jpg');
     background-size: cover;
     background-position: center;
+}
+
+
+
+/* ============================== FOOTER STYLES ============================== */
+.footer {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    font-family: 'Fira Sans', sans-serif;
+    font-weight: 300;
+    margin: 20px 0;
+}
+
+.footer-text {
+    width: 100%;
+    margin-top: 0;
+}
+
+.footer-text i {
+    color: rgb(240, 42, 92);
+}
+
+.footer-icons {
+    width: 100%;
+    text-align: right;
+}
+
+.footer-link {
+    color: #525252;
+    text-decoration: none;
+    font-size: 1.5em;
+
+    transition-property: color;
+    transition-duration: 0.275s;
+    transition-timing-function: ease-in-out;
+}
+
+.footer-link:hover {
+    color: rgb(240, 42, 92);
 }
