@@ -20,6 +20,14 @@
     .hero-section {
         display: none;
     }
+
+    .featured-work h1 {
+        text-align: center;
+    }
+    
+    .featured-items {
+        grid-template-columns: 1fr;
+    }
 }
 
 @media screen and (min-width: 651px) and (max-width: 899px) {
