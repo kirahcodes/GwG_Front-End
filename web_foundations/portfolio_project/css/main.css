@@ -17,7 +17,6 @@ body {
     border-bottom: solid 2px #525252;
     display: flex;
     flex-wrap: nowrap;
-    min-width: 340px;
 }
 
 .header-logo img {
@@ -206,6 +205,7 @@ body {
 
 .footer {
     display: flex;
+    width: 100%;
     font-family: 'Fira Sans', sans-serif;
     font-weight: 300;
     margin: 20px 0;
