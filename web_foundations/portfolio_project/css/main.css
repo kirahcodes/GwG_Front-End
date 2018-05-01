@@ -87,18 +87,19 @@ body {
 }
 
 .featured-items {
+    margin: 0 auto;
     width: 100%;
     display: inline-grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr;
     grid-gap: 5%;
     font-family: 'Fira Sans', sans-serif;
     box-sizing: border-box;
 }
 
-.project-container {
+.featured-project {
     font-family: 'Fira Sans', sans-serif;
     background: #f8f8f8;
-    margin-bottom: 10%;
+    margin-bottom: 15%;
     border-radius: 10px;
     height: 360px;
     box-shadow: 1px 1px 10px rgba(12, 12, 12, 0.685);
