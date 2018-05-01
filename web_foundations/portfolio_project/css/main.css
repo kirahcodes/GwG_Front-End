@@ -87,19 +87,23 @@ body {
 }
 
 .featured-items {
-    margin: 0 auto;
+    margin: auto;
+    list-style: none;
     width: 100%;
-    display: inline-grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    grid-gap: 5%;
+    display: flex;
+    flex-wrap: wrap;
     font-family: 'Fira Sans', sans-serif;
     box-sizing: border-box;
+    padding-left: 0;
+    margin-bottom: 5%;
 }
 
 .featured-project {
+    box-sizing: border-box;
+    width: 30%;
+    margin: 1.66%;
     font-family: 'Fira Sans', sans-serif;
     background: #f8f8f8;
-    margin-bottom: 15%;
     border-radius: 10px;
     height: 360px;
     box-shadow: 1px 1px 10px rgba(12, 12, 12, 0.685);
@@ -131,8 +135,8 @@ body {
 }
 
 .project-buttons {
-    display: grid;
-    grid-template-columns: 1fr;
+    display: flex;
+    width: 100%;
     text-align: center;
 }
 
@@ -199,16 +203,16 @@ body {
 
 
 /* ============================== FOOTER STYLES ============================== */
+
 .footer {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
+    display: flex;
     font-family: 'Fira Sans', sans-serif;
     font-weight: 300;
     margin: 20px 0;
 }
 
 .footer-text {
-    width: 100%;
+    width: 50%;
     margin-top: 0;
 }
 
@@ -217,7 +221,7 @@ body {
 }
 
 .footer-icons {
-    width: 100%;
+    width: 50%;
     text-align: right;
 }
 
