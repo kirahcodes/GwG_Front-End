@@ -10,16 +10,17 @@ const cards = [
     'fa-bomb', 'fa-bomb',
 ];
 
-// Generate HTML for each card
+/* Generate HTML for each card */
 function generateCard(card) {
     let cardCode = `<li class="card" data-symbol="${card}"><i class="fa ${card}"></i></li>`;
     return cardCode;
 }
 
-
+/* Set up the game */
 function buildGame() {
-    let cardDeck = document.querySelector('.deck'); // the ul
-    /* shuffle the list of cards using the provided "shuffle" method below */ 
+    let cardDeck = document.querySelector('.deck');
+
+    /* Shuffle the list of cards using the provided "shuffle" method below */ 
     shuffle(cards); // Shuffle cards
     
     /* Loop through each card and create its HTML */
@@ -29,10 +30,11 @@ function buildGame() {
     /* add each card's HTML to the page */
     cardDeck.innerHTML = cardHTML.join('');
 }
+
 buildGame();
 
 let cardsArray = [...document.querySelectorAll('.card')];
-let flippedCards = [];
+let flippedCards = []; // hold the flipped cards
 let moveCounter = document.querySelector('.moves');
 let moves = 0;
 
@@ -59,6 +61,9 @@ function addToflippedCards(card) {
     // When 2 cards are open
     if (flippedCards.length == 2) {
         checkForMatch(flippedCards);
+
+        moves++; // increment the move counter for every pair flipped
+        moveCounter.innerText = moves; // update the move counter
         
         // if the flipped cards don't match, hide them
         setTimeout(function() {
@@ -83,6 +88,7 @@ function displayCard(card) {
 cardsArray.forEach(function(card) {
     // set up the event listener for a card
     card.addEventListener('click', function() {
+        
         // if card is NOT flipped (has open/show class)
         if (!card.classList.contains('open') && !card.classList.contains('show')) {
             // display the card's symbol
@@ -90,6 +96,7 @@ cardsArray.forEach(function(card) {
         }
     });
 });
+
 /*
 display the card's symbol (put this functionality in another function that you call from this one) 
 add the card to a *list* of "open" cards (put this functionality in another function that you call from this one)
@@ -99,7 +106,9 @@ add the card to a *list* of "open" cards (put this functionality in another func
 *    + increment the move counter and display it on the page (put this functionality in another function that you call from this one)
 *    + if all cards have matched, display a message with the final score (put this functionality in another function that you call from this one)
 */
+
 // Shuffle function from http://stackoverflow.com/a/2450976
+
 function shuffle(array) {
     let currentIndex = array.length,
     temporaryValue, randomIndex;
