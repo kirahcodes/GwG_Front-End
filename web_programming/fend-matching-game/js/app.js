@@ -10,10 +10,27 @@ const cards = [
     'fa-bomb', 'fa-bomb',
 ];
 const restartButton = document.querySelector('.restart');
+
 /* Generate HTML for each card */
 function generateCard(card) {
     let cardCode = `<li class="card" data-symbol="${card}"><i class="fa ${card}"></i></li>`;
     return cardCode;
+}
+
+/* Shuffle function from http://stackoverflow.com/a/2450976 */
+function shuffle(array) {
+    let currentIndex = array.length,
+        temporaryValue, randomIndex;
+
+    while (currentIndex !== 0) {
+        randomIndex = Math.floor(Math.random() * currentIndex);
+        currentIndex -= 1;
+        temporaryValue = array[currentIndex];
+        array[currentIndex] = array[randomIndex];
+        array[randomIndex] = temporaryValue;
+    }
+
+    return array;
 }
 
 /* Set up the game */
@@ -27,7 +44,7 @@ function buildGame() {
     let cardHTML = cards.map(function(card) {
         return generateCard(card);
     });
-    /* add each card's HTML to the page */
+    /* Add each card's HTML to the page */
     cardDeck.innerHTML = cardHTML.join('');
 }
 
@@ -38,21 +55,34 @@ let flippedCards = []; // hold the flipped cards
 let moveCounter = document.querySelector('.moves');
 let starCounter = [...document.querySelectorAll('li i.fa.fa-star')];
 let moves = 0;
+let matches = 0;
 
 moveCounter.innerText = moves; // move counter 0 by default
 
+/* Check for matches */
 function checkForMatch(cards) {
-    // if the cards match
+    /* If the cards symbols match */
     if (cards[0].dataset.symbol === cards[1].dataset.symbol) {
+        /* Add the match class to each matching card */
         cards[0].classList.add('match');
         cards[1].classList.add('match');
         
+        /* Remove the open and show class from the match */
         cards[0].classList.remove('open', 'show');
         cards[1].classList.remove('open', 'show');
-    } 
+
+        /* Increment the match counter */
+        matches++;
+    }
+
+    /* When all matches are found, display modal */
+    if (matches == 8) {
+        displayModal();
+    }
 }
 
-function handleStarCounter(moves) {
+/* Star rating calculator */
+function handleStarRating(moves) {
     let stars = document.querySelector('.stars');
     
     // If the move counter exceeds 10
@@ -68,16 +98,11 @@ function handleStarCounter(moves) {
             starCounter[1].classList.remove('fa', 'fa-star');
             // add the star outline
             starCounter[1].classList.add('fa', 'fa-star-o');
-        } 
-    
+        }     
     } 
-    console.log(starCounter);
-    // else if (moves > 30) {
-    //     starCounter[0].classList.remove('fa', 'fa-star');
-    // }
 }
 
-// add the open card to a list of open cards
+/* Add the open card to a list of open cards */
 function addToflippedCards(card) {
     // pushes current flipped card into array
     flippedCards.push(card);
@@ -90,7 +115,7 @@ function addToflippedCards(card) {
         moves++; // increment the move counter for every pair flipped
         moveCounter.innerText = moves; // update the move counter
 
-        handleStarCounter(moves);
+        handleStarRating(moves);
         // if the flipped cards don't match, hide them
         setTimeout(function() {
             // hide the flipped cards if they don't match
@@ -104,18 +129,33 @@ function addToflippedCards(card) {
     }
 }
 
+/* Display the card */
 function displayCard(card) {
     card.classList.add('open', 'show');
     
-    // Add the card to the flippedCards array
+    /* Add the card to the flippedCards array */
     addToflippedCards(card);
 }
 
-// Click event Listener
+// Timer function
+function startTimer() {
+    console.log('time started.');
+}
+
+let flip = 0; // holds the first flip to start the timer
+
+/* Click event Listener */
 cardsArray.forEach(function(card) {
-    // set up the event listener for a card
+
+    /* Set up the event listener for a card */
     card.addEventListener('click', function() {
-        // if card is NOT flipped (has open/show class)
+        flip++;
+        /* Start the timer when the first card is clicked */
+        if (flip == 1) {
+            startTimer();
+        }
+
+        /* if card is NOT flipped (has open/show class) */
         if (!card.classList.contains('open') && !card.classList.contains('show')) {
             // display the card's symbol
             displayCard(card);
@@ -132,23 +172,6 @@ add the card to a *list* of "open" cards (put this functionality in another func
 *    + increment the move counter and display it on the page (put this functionality in another function that you call from this one)
 *    + if all cards have matched, display a message with the final score (put this functionality in another function that you call from this one)
 */
-
-// Shuffle function from http://stackoverflow.com/a/2450976
-
-function shuffle(array) {
-    let currentIndex = array.length,
-    temporaryValue, randomIndex;
-    
-    while (currentIndex !== 0) {
-        randomIndex = Math.floor(Math.random() * currentIndex);
-        currentIndex -= 1;
-        temporaryValue = array[currentIndex];
-        array[currentIndex] = array[randomIndex];
-        array[randomIndex] = temporaryValue;
-    }
-    
-    return array;
-}
 
 // Restart the game
 restartButton.addEventListener('click', function() {
