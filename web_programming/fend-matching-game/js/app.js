@@ -36,8 +36,10 @@ buildGame();
 let cardsArray = [...document.querySelectorAll('.card')];
 let flippedCards = []; // hold the flipped cards
 let moveCounter = document.querySelector('.moves');
+let starCounter = [...document.querySelectorAll('li i.fa.fa-star')];
 let moves = 0;
 
+moveCounter.innerText = moves; // move counter 0 by default
 
 function checkForMatch(cards) {
     // if the cards match
@@ -47,9 +49,32 @@ function checkForMatch(cards) {
         
         cards[0].classList.remove('open', 'show');
         cards[1].classList.remove('open', 'show');
-    } else {
-        return;
-    }
+    } 
+}
+
+function handleStarCounter(moves) {
+    let stars = document.querySelector('.stars');
+    
+    // If the move counter exceeds 10
+    if (moves > 10) {
+        // remove the 1st filled star
+        starCounter[2].classList.remove('fa', 'fa-star');
+        // add the star outline
+        starCounter[2].classList.add('fa', 'fa-star-o');
+    
+        // If the move counter exceeds 20
+        if (moves > 20) {
+            // remove the 2nd filled star
+            starCounter[1].classList.remove('fa', 'fa-star');
+            // add the star outline
+            starCounter[1].classList.add('fa', 'fa-star-o');
+        } 
+    
+    } 
+    console.log(starCounter);
+    // else if (moves > 30) {
+    //     starCounter[0].classList.remove('fa', 'fa-star');
+    // }
 }
 
 // add the open card to a list of open cards
@@ -64,7 +89,8 @@ function addToflippedCards(card) {
 
         moves++; // increment the move counter for every pair flipped
         moveCounter.innerText = moves; // update the move counter
-        
+
+        handleStarCounter(moves);
         // if the flipped cards don't match, hide them
         setTimeout(function() {
             flippedCards.forEach(function(flippedCard) {
@@ -88,7 +114,6 @@ function displayCard(card) {
 cardsArray.forEach(function(card) {
     // set up the event listener for a card
     card.addEventListener('click', function() {
-        
         // if card is NOT flipped (has open/show class)
         if (!card.classList.contains('open') && !card.classList.contains('show')) {
             // display the card's symbol
