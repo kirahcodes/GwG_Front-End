@@ -9,7 +9,7 @@ const cards = [
     'fa-bicycle', 'fa-bicycle',
     'fa-bomb', 'fa-bomb',
 ];
-
+const restartButton = document.querySelector('.restart');
 /* Generate HTML for each card */
 function generateCard(card) {
     let cardCode = `<li class="card" data-symbol="${card}"><i class="fa ${card}"></i></li>`;
@@ -93,6 +93,7 @@ function addToflippedCards(card) {
         handleStarCounter(moves);
         // if the flipped cards don't match, hide them
         setTimeout(function() {
+            // hide the flipped cards if they don't match
             flippedCards.forEach(function(flippedCard) {
                 flippedCard.classList.remove('open', 'show');
             });
@@ -148,3 +149,8 @@ function shuffle(array) {
     
     return array;
 }
+
+// Restart the game
+restartButton.addEventListener('click', function() {
+    location.reload();
+});
