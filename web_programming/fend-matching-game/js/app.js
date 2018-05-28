@@ -37,11 +37,11 @@ function shuffle(array) {
 function buildGame() {
     let cardDeck = document.querySelector('.deck');
 
-    /* Shuffle the list of cards using the provided "shuffle" method below */ 
+    /* Shuffle the list of cards using the provided "shuffle" method below */
     shuffle(cards); // Shuffle cards
-    
+
     /* Loop through each card and create its HTML */
-    let cardHTML = cards.map(function(card) {
+    let cardHTML = cards.map(function (card) {
         return generateCard(card);
     });
     /* Add each card's HTML to the page */
@@ -54,10 +54,16 @@ let cardsArray = [...document.querySelectorAll('.card')];
 let flippedCards = []; // hold the flipped cards
 let moveCounter = document.querySelector('.moves');
 let starCounter = [...document.querySelectorAll('li i.fa.fa-star')];
+let starCount = 3;
 let moves = 0;
 let matches = 0;
 
 moveCounter.innerText = moves; // move counter 0 by default
+
+function displayModal(starResult) {
+    const starHTML = `<i class="fa fa-star"></i>`;
+    console.log('Star Rating = ' + handleStarRating() + starHTML);
+}
 
 /* Check for matches */
 function checkForMatch(cards) {
@@ -66,7 +72,7 @@ function checkForMatch(cards) {
         /* Add the match class to each matching card */
         cards[0].classList.add('match');
         cards[1].classList.add('match');
-        
+
         /* Remove the open and show class from the match */
         cards[0].classList.remove('open', 'show');
         cards[1].classList.remove('open', 'show');
@@ -75,8 +81,9 @@ function checkForMatch(cards) {
         matches++;
     }
 
-    /* When all matches are found, display modal */
+    /* When all matches are found, stop the timer and display results */
     if (matches == 8) {
+        stopTimer();
         displayModal();
     }
 }
@@ -84,31 +91,39 @@ function checkForMatch(cards) {
 /* Star rating calculator */
 function handleStarRating(moves) {
     let stars = document.querySelector('.stars');
-    
     // If the move counter exceeds 10
     if (moves > 10) {
+        // decrement the star count by 1
+        starCount = 2;
+
         // remove the 1st filled star
         starCounter[2].classList.remove('fa', 'fa-star');
+        
         // add the star outline
         starCounter[2].classList.add('fa', 'fa-star-o');
-    
+
         // If the move counter exceeds 20
         if (moves > 20) {
+            // decrement the star count by 1
+            starCount = 1;
+
             // remove the 2nd filled star
             starCounter[1].classList.remove('fa', 'fa-star');
+            
             // add the star outline
             starCounter[1].classList.add('fa', 'fa-star-o');
-        }     
-    } 
+        }
+    }
+    return starCount;
 }
 
 /* Add the open card to a list of open cards */
 function addToflippedCards(card) {
-    // pushes current flipped card into array
+    /* Pushes current flipped card into array */
     flippedCards.push(card);
     card.classList.add('open', 'show');
-    
-    // When 2 cards are open
+
+    /* When 2 cards are open */
     if (flippedCards.length == 2) {
         checkForMatch(flippedCards);
 
@@ -116,14 +131,14 @@ function addToflippedCards(card) {
         moveCounter.innerText = moves; // update the move counter
 
         handleStarRating(moves);
-        // if the flipped cards don't match, hide them
-        setTimeout(function() {
-            // hide the flipped cards if they don't match
-            flippedCards.forEach(function(flippedCard) {
+        /* if the flipped cards don't match, hide them */
+        setTimeout(function () {
+            /* hide the flipped cards if they don't match */
+            flippedCards.forEach(function (flippedCard) {
                 flippedCard.classList.remove('open', 'show');
             });
-            
-            // remove all open cards
+
+            /* Remove all open cards */
             flippedCards = [];
         }, 750);
     }
@@ -132,30 +147,71 @@ function addToflippedCards(card) {
 /* Display the card */
 function displayCard(card) {
     card.classList.add('open', 'show');
-    
+
     /* Add the card to the flippedCards array */
     addToflippedCards(card);
 }
 
-// Timer function
-function startTimer() {
-    console.log('time started.');
-}
-
 let flip = 0; // holds the first flip to start the timer
 
-/* Click event Listener */
-cardsArray.forEach(function(card) {
+let ms = 0,
+    seconds = 0,
+    minutes = 0,
+    hours = 0;
 
+/* Starts the timer */
+function startTimer() {
+    let minStr, secStr;
+
+    /* Increment the seconds every 1000ms */
+    seconds++;
+
+    /* Increment minutes every 60 seconds */
+    if (seconds > 59) {
+        minutes++;
+
+        /* Reset seconds to 0 when 1 minute is reached */
+        seconds = 0;
+    }
+
+    /* Handle single digit minutes and seconds */
+    if (minutes < 10) {
+        minStr = '0' + minutes;
+
+        if (seconds < 10) {
+            secStr = '0' + seconds;
+        } else {
+            secStr = seconds;
+        }
+    } else {
+        minStr = minutes;
+    }
+
+    let time = ('' + minStr + ':' + secStr);
+    console.log(time);
+
+    return time;
+}
+
+function stopTimer() {
+    // Clear the interval
+    clearInterval(ms); // stop the timer
+    let time = startTimer();
+    console.log('Last match found at ' + time);
+}
+
+/* Click event Listener for each card*/
+cardsArray.forEach(function (card) {
     /* Set up the event listener for a card */
-    card.addEventListener('click', function() {
+    card.addEventListener('click', function () {
         flip++;
         /* Start the timer when the first card is clicked */
         if (flip == 1) {
-            startTimer();
+            seconds = 0;
+            ms = setInterval(startTimer, 1000);
         }
 
-        /* if card is NOT flipped (has open/show class) */
+        /* If card is NOT flipped (has open/show class) */
         if (!card.classList.contains('open') && !card.classList.contains('show')) {
             // display the card's symbol
             displayCard(card);
@@ -163,17 +219,7 @@ cardsArray.forEach(function(card) {
     });
 });
 
-/*
-display the card's symbol (put this functionality in another function that you call from this one) 
-add the card to a *list* of "open" cards (put this functionality in another function that you call from this one)
-*  - if the list already has another card, check to see if the two cards match
-*    + if the cards do match, lock the cards in the open position (put this functionality in another function that you call from this one)
-*    + if the cards do not match, remove the cards from the list and hide the card's symbol (put this functionality in another function that you call from this one)
-*    + increment the move counter and display it on the page (put this functionality in another function that you call from this one)
-*    + if all cards have matched, display a message with the final score (put this functionality in another function that you call from this one)
-*/
-
-// Restart the game
-restartButton.addEventListener('click', function() {
+/* Restart the game */
+restartButton.addEventListener('click', function () {
     location.reload();
 });
