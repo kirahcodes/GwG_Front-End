@@ -63,6 +63,8 @@ moveCounter.innerText = moves; // move counter 0 by default
 function displayModal(starResult) {
     const starHTML = `<i class="fa fa-star"></i>`;
     console.log('Star Rating = ' + handleStarRating() + starHTML);
+    const timeDisplay = document.querySelector('.time');
+    timeDisplay.innerHTML = '' + startTimer();
 }
 
 /* Check for matches */
@@ -74,8 +76,8 @@ function checkForMatch(cards) {
         cards[1].classList.add('match', 'rubberBand');
 
         /* Remove the open and show class from the match */
-        cards[0].classList.remove('open', 'show', 'flipInY');
-        cards[1].classList.remove('open', 'show', 'flipInY');
+        cards[0].classList.remove('open', 'show');
+        cards[1].classList.remove('open', 'show');
 
         /* Increment the match counter */
         matches++;
@@ -128,7 +130,7 @@ function addToflippedCards(card) {
         setTimeout(function () {
             /* hide the flipped cards if they don't match */
             flippedCards.forEach(function (flippedCard) {
-                flippedCard.classList.remove('open', 'show', 'flipInY');
+                flippedCard.classList.remove('open', 'show');
             });
 
             /* Remove all open cards */
@@ -139,7 +141,7 @@ function addToflippedCards(card) {
 
 /* Display the card */
 function displayCard(card) {
-    card.classList.add('open', 'show', 'flipInY');
+    card.classList.add('open', 'show');
 
     /* Add the card to the flippedCards array */
     addToflippedCards(card);
