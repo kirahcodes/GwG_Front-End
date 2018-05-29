@@ -87,14 +87,21 @@ h1 {
 
 .score-panel {
     text-align: left;
-    width: 345px;
+    width: 500px;
     margin-bottom: 10px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); 
+}
+
+.score-panel .star-rating {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    width: 100%;
 }
 
 .score-panel .stars {
     margin: 0;
     padding: 0;
-    display: inline-block;
     margin: 0 5px 0 0;
 }
 
@@ -103,7 +110,13 @@ h1 {
     display: inline-block;
 }
 
-.score-panel .restart {
-    float: right;
-    cursor: pointer;
+.score-panel .time {
+    text-align: center;
 }
+
+.score-panel .restart {
+    cursor: pointer;
+    text-align: center;
+}
+
+/* ========================= MODAL ========================= */
