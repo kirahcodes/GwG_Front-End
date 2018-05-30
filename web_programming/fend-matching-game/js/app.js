@@ -60,11 +60,13 @@ let matches = 0;
 
 moveCounter.innerText = moves; // move counter 0 by default
 
-function displayModal(starResult) {
-    const starHTML = `<i class="fa fa-star"></i>`;
-    console.log('Star Rating = ' + handleStarRating() + starHTML);
-    const timeDisplay = document.querySelector('.time');
-    timeDisplay.innerHTML = '' + startTimer();
+function displayModal() {
+    // const starHTML = `<i class="fa fa-star"></i>`;
+    // console.log('Star Rating = ' + handleStarRating() + starHTML);
+    cardsArray.forEach(function(card) {
+        card.classList.remove('flash');
+        card.classList.add('tada');
+    });
 }
 
 /* Check for matches */
@@ -72,8 +74,8 @@ function checkForMatch(cards) {
     /* If the cards symbols match */
     if (cards[0].dataset.symbol === cards[1].dataset.symbol) {
         /* Add the match class to each matching card */
-        cards[0].classList.add('match', 'rubberBand');
-        cards[1].classList.add('match', 'rubberBand');
+        cards[0].classList.add('match', 'flash');
+        cards[1].classList.add('match', 'flash');
 
         /* Remove the open and show class from the match */
         cards[0].classList.remove('open', 'show');
@@ -86,7 +88,7 @@ function checkForMatch(cards) {
     /* When all matches are found, stop the timer and display results */
     if (matches == 8) {
         stopTimer();
-        displayModal();
+        setInterval(displayModal, 1500);
     }
 }
 
@@ -130,7 +132,7 @@ function addToflippedCards(card) {
         setTimeout(function () {
             /* hide the flipped cards if they don't match */
             flippedCards.forEach(function (flippedCard) {
-                flippedCard.classList.remove('open', 'show');
+                flippedCard.classList.remove('open', 'show', 'flipInX');
             });
 
             /* Remove all open cards */
@@ -141,7 +143,7 @@ function addToflippedCards(card) {
 
 /* Display the card */
 function displayCard(card) {
-    card.classList.add('open', 'show');
+    card.classList.add('open', 'show', 'flipInX');
 
     /* Add the card to the flippedCards array */
     addToflippedCards(card);
@@ -153,6 +155,7 @@ let ms = 0,
     seconds = 0,
     minutes = 0,
     hours = 0;
+let timeDisplay = document.querySelector('.time');
 
 /* Starts the timer */
 function startTimer() {
@@ -183,16 +186,17 @@ function startTimer() {
     }
 
     let time = ('' + minStr + ':' + secStr);
-    console.log(time);
-
+    timeDisplay.textContent = time;
+    
     return time;
 }
 
 function stopTimer() {
-    // Clear the interval
-    clearInterval(ms); // stop the timer
+    // Stop the timer
+    clearInterval(ms);
     let time = startTimer();
-    console.log('Last match found at ' + time);
+
+    return time;
 }
 
 /* Click event Listener for each card*/
@@ -209,7 +213,7 @@ cardsArray.forEach(function (card) {
         /* If card is NOT flipped (has open/show class) */
         if (!card.classList.contains('open') && 
             !card.classList.contains('show') &&
-            !card.classList.contains('rubberBand')) {
+            !card.classList.contains('flash')) {
 
             // display the card's symbol
             displayCard(card);
@@ -219,5 +223,5 @@ cardsArray.forEach(function (card) {
 
 /* Restart the game */
 restartButton.addEventListener('click', function () {
-    location.reload();
+    location.reload(); // reload the page
 });
