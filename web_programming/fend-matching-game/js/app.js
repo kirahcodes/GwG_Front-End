@@ -11,12 +11,6 @@ const cards = [
 ];
 const restartButton = document.querySelector('.restart');
 
-/* Generate HTML for each card */
-function generateCard(card) {
-    let cardCode = `<li class="card animated" data-symbol="${card}"><i class="fa ${card}"></i></li>`;
-    return cardCode;
-}
-
 /* Shuffle function from http://stackoverflow.com/a/2450976 */
 function shuffle(array) {
     let currentIndex = array.length,
@@ -33,19 +27,26 @@ function shuffle(array) {
     return array;
 }
 
+/* Generate HTML for each card */
+function generateCard(card) {
+    let cardCode = `<li class="card animated" data-symbol="${card}"><i class="fa ${card}"></i></li>`;
+    return cardCode;
+}
+
 /* Set up the game */
 function buildGame() {
-    let cardDeck = document.querySelector('.deck');
+    let deck = document.querySelector('.deck');
 
-    /* Shuffle the list of cards using the provided "shuffle" method below */
+    /* Shuffle the list of cards using the provided "shuffle" method */
     shuffle(cards); // Shuffle cards
 
     /* Loop through each card and create its HTML */
     let cardHTML = cards.map(function (card) {
         return generateCard(card);
     });
+
     /* Add each card's HTML to the page */
-    cardDeck.innerHTML = cardHTML.join('');
+    deck.innerHTML = cardHTML.join('');
 }
 
 buildGame();
@@ -61,12 +62,29 @@ let matches = 0;
 moveCounter.innerText = moves; // move counter 0 by default
 
 function displayModal() {
-    // const starHTML = `<i class="fa fa-star"></i>`;
-    // console.log('Star Rating = ' + handleStarRating() + starHTML);
+    const modal = document.querySelector('.modal-container');
+    let displayTime = document.querySelector('.finalTime');
+    let displayStarRating = document.querySelector('.finalStarRating');
+    let displayMoves = document.querySelector('.finalMoveCount');
+
+    displayTime.innerText = stopTimer();
+    displayStarRating.innerText = starCount;
+    displayMoves.innerText = moves;
+    
     cardsArray.forEach(function(card) {
         card.classList.remove('flash');
         card.classList.add('tada');
     });
+    
+    modal.classList.remove('hide');
+    modal.classList.add('fadeIn');
+    /**
+     * TODO: For Modal
+     * Display congrats message
+     * Ask if they want to play again
+     * Tell the user how much time it took them to win
+     * Tell the user what their star rating was
+     */
 }
 
 /* Check for matches */
@@ -88,7 +106,7 @@ function checkForMatch(cards) {
     /* When all matches are found, stop the timer and display results */
     if (matches == 8) {
         stopTimer();
-        setInterval(displayModal, 1500);
+        setInterval(displayModal, 2000);
     }
 }
 
@@ -97,18 +115,18 @@ function handleStarRating(moves) {
     let stars = document.querySelector('.stars');
     // If the move counter exceeds 10
     if (moves > 10) {
-        // decrement the star count by 1
+        // Decrement the star count by 1
         starCount = 2;
 
-        // remove the 1st filled star
+        // Remove the 1st filled star
         starCounter[2].classList.add('fadeOut');
 
         // If the move counter exceeds 20
         if (moves > 20) {
-            // decrement the star count by 1
+            // Decrement the star count by 1
             starCount = 1;
 
-            // remove the 2nd filled star
+            // Remove the 2nd filled star
             starCounter[1].classList.add('fadeOut');
         }
     }
@@ -171,7 +189,10 @@ function startTimer() {
         /* Reset seconds to 0 when 1 minute is reached */
         seconds = 0;
     }
-
+/**
+ * FIXME:
+ * seconds are undefined when minutes pass 10
+ */
     /* Handle single digit minutes and seconds */
     if (minutes < 10) {
         minStr = '0' + minutes;
@@ -195,7 +216,7 @@ function stopTimer() {
     // Stop the timer
     clearInterval(ms);
     let time = startTimer();
-
+    console.log(time);
     return time;
 }
 
@@ -205,7 +226,7 @@ cardsArray.forEach(function (card) {
     card.addEventListener('click', function () {
         flip++;
         /* Start the timer when the first card is clicked */
-        if (flip == 1) {
+        if (flip === 1) {
             seconds = 0;
             ms = setInterval(startTimer, 1000);
         }
