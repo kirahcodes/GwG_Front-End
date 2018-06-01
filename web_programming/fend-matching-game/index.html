@@ -16,8 +16,21 @@
             <h1>Matching Game</h1>
         </header>
 
-        <section class="modal"></section>
-        <section class="modal-bg"></section>
+        <div class="modal-container animate hide">
+            <section class="modal">
+                <div class="modal-info">
+                    <h2>Congratulations!</h2>
+                    <p>You found all the pairs in <span class="finalTime"></span> and
+                        with <span class="finalMoveCount"></span> moves.</p>
+                    <p>You have a star rating of <span class="finalStarRating"></span> stars!</p>
+                    <p>
+                        Would you like to play again?<br>
+                        <button><i class="fa fa-play"></i></button>
+                    </p>
+                </div>
+            </section>
+            <!-- <section class="modal-bg"></section> -->
+        </div>
 
         <section class="score-panel">
             <div class="star-rating">
